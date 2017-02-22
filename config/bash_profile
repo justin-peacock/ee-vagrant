@@ -27,4 +27,4 @@ if [ -d "$HOME/bin" ] ; then
 fi
 
 # PHPCS path
-export PATH="$PATH:/srv/www/phpcs/scripts/"
+export PATH="$PATH:/var/www/phpcs/scripts/"

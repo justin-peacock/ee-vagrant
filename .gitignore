@@ -13,3 +13,4 @@
 # And no need to share individual SQL files with each other
 *.sql
 *.sql.gz
+/www/phpcs/

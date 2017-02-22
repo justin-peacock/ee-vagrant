@@ -151,7 +151,7 @@ Vagrant.configure("2") do |config|
   # a mapped directory inside the VM will be created that contains these files.
   # This directory is used to maintain default database scripts as well as backed
   # up mysql dumps (SQL files) that are to be imported automatically on vagrant up
-#  config.vm.synced_folder "database/", "/srv/database"
+  config.vm.synced_folder "database/", "/srv/database"
 
   # If the mysql_upgrade_info file from a previous persistent database mapping is detected,
   # we'll continue to map that directory as /var/lib/mysql inside the virtual machine. Once
@@ -159,28 +159,28 @@ Vagrant.configure("2") do |config|
   # is now available inside the virtual machine to backup all databases for future use. This
   # command is automatically issued on halt, suspend, and destroy if the vagrant-triggers
   # plugin is installed.
-#  if File.exists?(File.join(vagrant_dir,'database/data/mysql_upgrade_info')) #then
-#    if vagrant_version >= "1.3.0"
-#      config.vm.synced_folder "database/data/", "/var/lib/mysql", :mount_options => [ "dmode=777", "fmode=777" ]
-#    else
-#      config.vm.synced_folder "database/data/", "/var/lib/mysql", :extra => 'dmode=777,fmode=777'
-#    end
-#
-#    # The Parallels Provider does not understand "dmode"/"fmode" in the "mount_options" as
-#    # those are specific to Virtualbox. The folder is therefore overridden with one that
-#    # uses corresponding Parallels mount options.
-#    config.vm.provider :parallels do |v, override|
-#      override.vm.synced_folder "database/data/", "/var/lib/mysql", :mount_options => []
-#    end
-#  end
-#
-#  # /srv/config/
-#  #
-#  # If a server-conf directory exists in the same directory as your Vagrantfile,
-#  # a mapped directory inside the VM will be created that contains these files.
-#  # This directory is currently used to maintain various config files for php and
-#  # nginx as well as any pre-existing database files.
-#  config.vm.synced_folder "config/", "/srv/config"
+  if File.exists?(File.join(vagrant_dir,'database/data/mysql_upgrade_info')) #then
+    if vagrant_version >= "1.3.0"
+      config.vm.synced_folder "database/data/", "/var/lib/mysql", :mount_options => [ "dmode=777", "fmode=777" ]
+    else
+      config.vm.synced_folder "database/data/", "/var/lib/mysql", :extra => 'dmode=777,fmode=777'
+    end
+
+    # The Parallels Provider does not understand "dmode"/"fmode" in the "mount_options" as
+    # those are specific to Virtualbox. The folder is therefore overridden with one that
+    # uses corresponding Parallels mount options.
+    config.vm.provider :parallels do |v, override|
+      override.vm.synced_folder "database/data/", "/var/lib/mysql", :mount_options => []
+    end
+  end
+
+  # /srv/config/
+  #
+  # If a server-conf directory exists in the same directory as your Vagrantfile,
+  # a mapped directory inside the VM will be created that contains these files.
+  # This directory is currently used to maintain various config files for php and
+  # nginx as well as any pre-existing database files.
+  config.vm.synced_folder "config/", "/srv/config"
 
   # /var/log/
   #

@@ -12,7 +12,7 @@ noroot() {
 install_ee() {
     noroot
     echo "Installing EasyEngine"
-    echo -e "[user]\n\tname = Justin Peacock\n\temail = justin@sixteenbit.com" > ~/.gitconfig
+    echo -e "[user]\n\tname = Your Name\n\temail = your@email.com" > ~/.gitconfig
 
     wget -qO ee rt.cx/ee && sudo bash ee  || exit 1
 

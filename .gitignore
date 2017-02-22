@@ -1,0 +1,19 @@
+# Stuff that pops up locally for me - @jeremyfelt
+*.sublime*
+.DS_Store
+.idea
+
+# Because this really is a working directory, ignore vagrant's files
+/.vagrant
+
+# This is a file intended for hooking in a custom Vagrant configuration on up
+/Customfile
+/vvv-custom.yml
+
+# No need to share our individual sites with each other
+/www/*
+!/www/22222/htdocs/index.php
+
+# And no need to share individual SQL files with each other
+*.sql
+*.sql.gz

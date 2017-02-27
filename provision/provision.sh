@@ -14,17 +14,20 @@ noroot() {
 # Install EasyEngine
 install_ee() {
     noroot
-    echo "Installing EasyEngine"
-    echo -e "[user]\n\tname = $git_user\n\temail = $git_email" > ~/.gitconfig
 
-    wget -qO ee rt.cx/ee && sudo bash ee  || exit 1
+    if [[ ! -d "/etc/ee" ]]; then
+        noroot
+        echo "Installing EasyEngine"
+        echo -e "[user]\n\tname = $git_user\n\temail = $git_email" > ~/.gitconfig
 
-    echo "Installing EasyEngine Stack"
-    ee stack install
+        wget -qO ee rt.cx/ee && sudo bash ee  || exit 1
 
-    # Add the vagrant user to the www-data group so that it has better access
-    # to PHP and Nginx related files.
-    usermod -a -G www-data vagrant
+        echo "Installing EasyEngine Stack"
+        ee stack install
+    else
+        echo "Clear all cache"
+        ee clean
+    fi
 }
 
 profile_setup() {

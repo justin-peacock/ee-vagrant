@@ -1,5 +1,8 @@
 #! /bin/bash
 
+# Variables
+source config.sh
+
 # By storing the date now, we can calculate the duration of provisioning at the
 # end of this script.
 start_seconds="$(date +%s)"
@@ -12,7 +15,7 @@ noroot() {
 install_ee() {
     noroot
     echo "Installing EasyEngine"
-    echo -e "[user]\n\tname = Your Name\n\temail = your@email.com" > ~/.gitconfig
+    echo -e "[user]\n\tname = $git_user\n\temail = $git_email" > ~/.gitconfig
 
     wget -qO ee rt.cx/ee && sudo bash ee  || exit 1
 
@@ -79,9 +82,26 @@ php_codesniff() {
   phpcs -i
 }
 
+php_search_replace() {
+  # Search Replace DB
+  if [[ ! -d "/var/www/22222/htdocs/sr" ]]; then
+    echo -e "\nDownloading Search Replace DB, see https://github.com/interconnectit/Search-Replace-DB"
+    git clone -b master "https://github.com/interconnectit/Search-Replace-DB.git" "/var/www/22222/htdocs/sr"
+  else
+    cd /var/www/22222/htdocs/sr
+    if [[ $(git rev-parse --abbrev-ref HEAD) == 'master' ]]; then
+      echo -e "\nUpdating Search Replace DB..."
+      git pull --no-edit origin master
+    else
+      echo -e "\nSkipped updating Search Replace DB since not on master branch"
+    fi
+  fi
+}
+
 install_ee
 profile_setup
 php_codesniff
+php_search_replace
 
 #set +xv
 # And it's done

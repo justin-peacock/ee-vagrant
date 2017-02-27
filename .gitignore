@@ -28,6 +28,7 @@ plugins/
 /www/22222/htdocs/db/
 /www/22222/htdocs/fpm/
 /www/22222/htdocs/php/
+/www/22222/htdocs/sr/
 /www/html/
 /www/phpcs/
 /www/*.dev

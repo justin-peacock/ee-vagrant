@@ -14,12 +14,20 @@ ee-hosts
 # And no need to share individual SQL files with each other
 *.sql
 *.sql.gz
-www/phpcs/
-22222
-!www/22222/htdocs/index.php
 
 # WP
 uploads/
 upgrade/
 themes/
 plugins/
+
+# Public directories
+/www/22222/cert/
+/www/22222/logs/
+/www/22222/htdocs/cache/
+/www/22222/htdocs/db/
+/www/22222/htdocs/fpm/
+/www/22222/htdocs/php/
+/www/html/
+/www/phpcs/
+/www/*.dev

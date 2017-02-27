@@ -4,6 +4,7 @@
 .idea
 
 # Because this really is a working directory, ignore vagrant's files
+ee-hosts
 /.vagrant
 
 # This is a file intended for hooking in a custom Vagrant configuration on up
@@ -13,4 +14,12 @@
 # And no need to share individual SQL files with each other
 *.sql
 *.sql.gz
-/www/phpcs/
+www/phpcs/
+22222
+!www/22222/htdocs/index.php
+
+# WP
+uploads/
+upgrade/
+themes/
+plugins/
